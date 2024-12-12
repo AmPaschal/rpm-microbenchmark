@@ -1,0 +1,16 @@
+dontinline,*.*_all_jmhStub
+dontinline,*.*_avgt_jmhStub
+dontinline,*.*_sample_jmhStub
+dontinline,*.*_ss_jmhStub
+dontinline,*.*_thrpt_jmhStub
+inline,com/ampaschal/google/CheckPermissionBenchmark.measurePermissionVerification
+inline,com/ampaschal/google/CheckPermissionBenchmark.measurePermissionVerificationReflection
+inline,com/ampaschal/google/CheckPermissionBenchmark.setup
+inline,com/ampaschal/google/FileReadBenchmark.measureFileRead
+inline,com/ampaschal/google/FileWriteBenchmark.measureFileWrite
+inline,com/ampaschal/google/FileWriteBenchmark.setup
+inline,com/ampaschal/google/PermissionSetupBenchmark.measurePermissionSetup
+inline,com/ampaschal/google/RuntimeExecBenchmark.measureShellExec
+inline,com/ampaschal/google/SocketConnectBenchmark.measureSocketConnect
+inline,com/ampaschal/google/SocketConnectBenchmark.setup
+inline,com/ampaschal/google/ThreadStartBenchmark.measureThreadStart

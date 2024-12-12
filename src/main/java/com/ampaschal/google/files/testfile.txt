@@ -1,0 +1,197 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
+package java.io;
+
+import java.nio.channels.FileChannel;
+import sun.nio.ch.FileChannelImpl;
+
+public class FileInputStream extends InputStream {
+    private final FileDescriptor fd;
+    private final String path;
+    private volatile FileChannel channel;
+    private final Object closeLock;
+    private volatile boolean closed;
+    private final Object altFinalizer;
+
+    public FileInputStream(String name) throws FileNotFoundException {
+        this(name != null ? new File(name) : null);
+    }
+
+    public FileInputStream(File file) throws FileNotFoundException {
+        this.closeLock = new Object();
+        String name = file != null ? file.getPath() : null;
+        SecurityManager security = System.getSecurityManager();
+        if (security != null) {
+            security.checkRead(name);
+        }
+
+        if (name == null) {
+            throw new NullPointerException();
+        } else if (file.isInvalid()) {
+            throw new FileNotFoundException("Invalid file path");
+        } else {
+            this.fd = new FileDescriptor();
+            this.fd.attach(this);
+            this.path = name;
+            this.open(name);
+            this.altFinalizer = getFinalizer(this);
+            if (this.altFinalizer == null) {
+                FileCleanable.register(this.fd);
+            }
+
+        }
+    }
+
+    public FileInputStream(FileDescriptor fdObj) {
+        this.closeLock = new Object();
+        SecurityManager security = System.getSecurityManager();
+        if (fdObj == null) {
+            throw new NullPointerException();
+        } else {
+            if (security != null) {
+                security.checkRead(fdObj);
+            }
+
+            this.fd = fdObj;
+            this.path = null;
+            this.altFinalizer = null;
+            this.fd.attach(this);
+        }
+    }
+
+    private native void open0(String var1) throws FileNotFoundException;
+
+    private void open(String name) throws FileNotFoundException {
+        this.open0(name);
+    }
+
+    public int read() throws IOException {
+        return this.read0();
+    }
+
+    private native int read0() throws IOException;
+
+    private native int readBytes(byte[] var1, int var2, int var3) throws IOException;
+
+    public int read(byte[] b) throws IOException {
+        return this.readBytes(b, 0, b.length);
+    }
+
+    public int read(byte[] b, int off, int len) throws IOException {
+        return this.readBytes(b, off, len);
+    }
+
+    public long skip(long n) throws IOException {
+        return this.skip0(n);
+    }
+
+    private native long skip0(long var1) throws IOException;
+
+    public int available() throws IOException {
+        return this.available0();
+    }
+
+    private native int available0() throws IOException;
+
+    public void close() throws IOException {
+        if (!this.closed) {
+            synchronized(this.closeLock) {
+                if (this.closed) {
+                    return;
+                }
+
+                this.closed = true;
+            }
+
+            FileChannel fc = this.channel;
+            if (fc != null) {
+                fc.close();
+            }
+
+            this.fd.closeAll(new Closeable() {
+                public void close() throws IOException {
+                    FileInputStream.this.fd.close();
+                }
+            });
+        }
+    }
+
+    public final FileDescriptor getFD() throws IOException {
+        if (this.fd != null) {
+            return this.fd;
+        } else {
+            throw new IOException();
+        }
+    }
+
+    public FileChannel getChannel() {
+        FileChannel fc = this.channel;
+        if (fc == null) {
+            synchronized(this) {
+                fc = this.channel;
+                if (fc == null) {
+                    this.channel = fc = FileChannelImpl.open(this.fd, this.path, true, false, false, this);
+                    if (this.closed) {
+                        try {
+                            fc.close();
+                        } catch (IOException var5) {
+                            throw new InternalError(var5);
+                        }
+                    }
+                }
+            }
+        }
+
+        return fc;
+    }
+
+    private static native void initIDs();
+
+    /** @deprecated */
+    @Deprecated(
+        since = "9",
+        forRemoval = true
+    )
+    protected void finalize() throws IOException {
+    }
+
+    private static Object getFinalizer(FileInputStream fis) {
+        Class<?> clazz = fis.getClass();
+
+        while(clazz != FileInputStream.class) {
+            try {
+                clazz.getDeclaredMethod("close");
+                return new AltFinalizer(fis);
+            } catch (NoSuchMethodException var3) {
+                clazz = clazz.getSuperclass();
+            }
+        }
+
+        return null;
+    }
+
+    static {
+        initIDs();
+    }
+
+    static class AltFinalizer {
+        private final FileInputStream fis;
+
+        AltFinalizer(FileInputStream fis) {
+            this.fis = fis;
+        }
+
+        protected final void finalize() {
+            try {
+                if (this.fis.fd != null && this.fis.fd != FileDescriptor.in) {
+                    this.fis.close();
+                }
+            } catch (IOException var2) {
+            }
+
+        }
+    }
+}

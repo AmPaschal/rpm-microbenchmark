@@ -1,0 +1,74 @@
+# Benchmark: com.ampaschal.google.FileReadBenchmark.measureFileRead
+# Parameters: (filename = /home/pamusuo/research/permissions-manager/rpm-microbenchmark/src/main/java/com/ampaschal/google/files/testfile.txt)
+
+Result "com.ampaschal.google.FileReadBenchmark.measureFileRead":
+  7.960 ±(99.9%) 0.270 us/op [Average]
+  (min, avg, max) = (7.630, 7.960, 8.377), stdev = 0.252
+  CI (99.9%): [7.690, 8.229] (assumes normal distribution)
+
+# Benchmark: com.ampaschal.google.FileReadBenchmark.measureFileRead
+# Parameters: (filename = /home/pamusuo/research/permissions-manager/rpm-microbenchmark/src/main/java/com/ampaschal/google/files/testfilecontents.txt)
+
+Result "com.ampaschal.google.FileReadBenchmark.measureFileRead":
+  9.414 ±(99.9%) 0.382 us/op [Average]
+  (min, avg, max) = (8.889, 9.414, 10.019), stdev = 0.358
+  CI (99.9%): [9.031, 9.796] (assumes normal distribution)
+
+# Benchmark: com.ampaschal.google.FileWriteBenchmark.measureFileWrite
+# Parameters: (inputFileName = /home/pamusuo/research/permissions-manager/rpm-microbenchmark/src/main/java/com/ampaschal/google/files/testfile.txt)
+
+Result "com.ampaschal.google.FileWriteBenchmark.measureFileWrite":
+  33.779 ±(99.9%) 1.734 us/op [Average]
+  (min, avg, max) = (31.477, 33.779, 36.091), stdev = 1.622
+  CI (99.9%): [32.044, 35.513] (assumes normal distribution)
+
+# Benchmark: com.ampaschal.google.FileWriteBenchmark.measureFileWrite
+# Parameters: (inputFileName = /home/pamusuo/research/permissions-manager/rpm-microbenchmark/src/main/java/com/ampaschal/google/files/testfilecontents.txt)
+
+Result "com.ampaschal.google.FileWriteBenchmark.measureFileWrite":
+  33.181 ±(99.9%) 1.932 us/op [Average]
+  (min, avg, max) = (31.072, 33.181, 35.993), stdev = 1.807
+  CI (99.9%): [31.249, 35.113] (assumes normal distribution)
+
+# Benchmark: com.ampaschal.google.RuntimeExecBenchmark.measureShellExec
+# Parameters: (command = ls -l)
+
+Result "com.ampaschal.google.RuntimeExecBenchmark.measureShellExec":
+  320.689 ±(99.9%) 27.895 us/op [Average]
+  (min, avg, max) = (295.962, 320.689, 363.369), stdev = 26.093
+  CI (99.9%): [292.794, 348.584] (assumes normal distribution)
+
+# Benchmark: com.ampaschal.google.RuntimeExecBenchmark.measureShellExec
+# Parameters: (command = whoami)
+
+Result "com.ampaschal.google.RuntimeExecBenchmark.measureShellExec":
+  291.497 ±(99.9%) 23.459 us/op [Average]
+  (min, avg, max) = (269.687, 291.497, 324.520), stdev = 21.944
+  CI (99.9%): [268.037, 314.956] (assumes normal distribution)
+
+
+# Benchmark: com.ampaschal.google.SocketConnectBenchmark.measureSocketConnect
+
+Result "com.ampaschal.google.SocketConnectBenchmark.measureSocketConnect":
+  71.227 ±(99.9%) 2.564 us/op [Average]
+  (min, avg, max) = (69.247, 71.227, 79.364), stdev = 2.398
+  CI (99.9%): [68.664, 73.791] (assumes normal distribution)
+
+Benchmark                                    (command)                                                                                                                   (filename)                                                                                                              (inputFileName)  Mode  Cnt    Score    Error  Units
+FileReadBenchmark.measureFileRead                  N/A          /home/pamusuo/research/permissions-manager/rpm-microbenchmark/src/main/java/com/ampaschal/google/files/testfile.txt                                                                                                                          N/A  avgt   15    7.960 ±  0.270  us/op
+FileReadBenchmark.measureFileRead                  N/A  /home/pamusuo/research/permissions-manager/rpm-microbenchmark/src/main/java/com/ampaschal/google/files/testfilecontents.txt                                                                                                                          N/A  avgt   15    9.414 ±  0.382  us/op
+FileWriteBenchmark.measureFileWrite                N/A                                                                                                                          N/A          /home/pamusuo/research/permissions-manager/rpm-microbenchmark/src/main/java/com/ampaschal/google/files/testfile.txt  avgt   15   33.779 ±  1.734  us/op
+FileWriteBenchmark.measureFileWrite                N/A                                                                                                                          N/A  /home/pamusuo/research/permissions-manager/rpm-microbenchmark/src/main/java/com/ampaschal/google/files/testfilecontents.txt  avgt   15   33.181 ±  1.932  us/op
+RuntimeExecBenchmark.measureShellExec            ls -l                                                                                                                          N/A                                                                                                                          N/A  avgt   15  320.689 ± 27.895  us/op
+RuntimeExecBenchmark.measureShellExec           whoami                                                                                                                          N/A                                                                                                                          N/A  avgt   15  291.497 ± 23.459  us/op
+SocketConnectBenchmark.measureSocketConnect        N/A                                                                                                                          N/A                                                                                                                          N/A  avgt   15   71.227 ±  2.564  us/op
+              
+
+Benchmark                                    (command)                                                                                                                   (filename)                                                                                                              (inputFileName)  Mode  Cnt    Score   Error  Units
+FileReadBenchmark.measureFileRead                  N/A          /home/pamusuo/research/permissions-manager/rpm-microbenchmark/src/main/java/com/ampaschal/google/files/testfile.txt                                                                                                                          N/A  avgt   15   23.620 ± 0.199  us/op
+FileReadBenchmark.measureFileRead                  N/A  /home/pamusuo/research/permissions-manager/rpm-microbenchmark/src/main/java/com/ampaschal/google/files/testfilecontents.txt                                                                                                                          N/A  avgt   15   24.663 ± 0.346  us/op
+FileWriteBenchmark.measureFileWrite                N/A                                                                                                                          N/A          /home/pamusuo/research/permissions-manager/rpm-microbenchmark/src/main/java/com/ampaschal/google/files/testfile.txt  avgt   15   33.230 ± 0.563  us/op
+FileWriteBenchmark.measureFileWrite                N/A                                                                                                                          N/A  /home/pamusuo/research/permissions-manager/rpm-microbenchmark/src/main/java/com/ampaschal/google/files/testfilecontents.txt  avgt   15   33.568 ± 0.582  us/op
+RuntimeExecBenchmark.measureShellExec            ls -l                                                                                                                          N/A                                                                                                                          N/A  avgt   15  345.703 ± 3.981  us/op
+RuntimeExecBenchmark.measureShellExec           whoami                                                                                                                          N/A                                                                                                                          N/A  avgt   15  323.734 ± 2.295  us/op
+SocketConnectBenchmark.measureSocketConnect        N/A                                                                                                                          N/A                                                                                                                          N/A  avgt   15   72.186 ± 2.343  us/op           
